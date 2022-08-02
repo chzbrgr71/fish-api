@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: azure-hello
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: azure-hello
+  template:
+    metadata:
+      labels:
+        app: azure-hello
+    spec:
+      containers:    
+        #- image: sonofjorel/azure-hello:v1.0
+        - image: sonofjorel/azure-hello:v2.0
+          name: azure-hello
+          ports:
+          - containerPort: 8080
+            protocol: TCP        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: azure-hello
+  labels:
+    name: azure-hello
+spec:
+  type: LoadBalancer
+  ports:
+  - name: http
+    port: 8081
+    targetPort: 8080
+  selector:
+    app: azure-hello
