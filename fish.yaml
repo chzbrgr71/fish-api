@@ -13,14 +13,15 @@ spec:
         app: fish-api
     spec:
       containers:
-        - image: reddog.azurecr.io/chzbrgr71/fish-api:v1.1
+        - image: chzbrgr71/fish-api:v2
+        #- image: reddog.azurecr.io/chzbrgr71/fish-api:v2
           name: fish-api
           ports:
           - containerPort: 3000
             protocol: TCP        
           env:
           - name: REDIS_PASSWORD
-            value: 'w@lkingth3d0g'
+            value: ''
           - name: REDIS_HOST
             value: 'redis-release-master.redis.svc.cluster.local'
           - name: REDIS_PORT
